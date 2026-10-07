@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Facundo Cardinal · Portfolio</title>
+<meta name="description" content="Facundo Cardinal — desarrollo de producto, IA aplicada, datos y UX sobre CRM/ERP." />
+<meta property="og:title" content="Facundo Cardinal · Portfolio" />
+<meta property="og:description" content="Desarrollo de producto, IA aplicada, datos y UX sobre CRM/ERP." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://facucardi.github.io/" />
+<meta name="theme-color" content="#06251F" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306251F'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='26' font-weight='700' fill='%2312A092' text-anchor='middle'%3EFC%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root{
+    --bg:#FAFBFB; --surface:#FFFFFF; --ink:#14201C; --muted:#5B6B66;
+    --teal:#0D8B7E; --teal-deep:#0A5D54; --teal-ink:#06251F;
+    --line:#E4EAE8; --line-2:#D2DCD9;
+    --display:"Space Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit}
+  [hidden]{display:none!important}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  /* HERO */
+  .hero{background:var(--teal-ink);color:#EAF3F1;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(1200px 480px at 78% -12%,rgba(13,139,126,.35),transparent 60%)}
+  .hero .wrap{position:relative;z-index:1;padding:40px 28px 64px}
+  .topbar{display:flex;justify-content:flex-end;align-items:center;gap:22px;margin-bottom:88px;font-family:var(--mono);font-size:13px}
+  .topbar a{color:#B9D4CE;transition:color .2s}
+  .topbar a:hover{color:#fff}
+  .lang{display:inline-flex;border:1px solid rgba(255,255,255,.22);border-radius:8px;overflow:hidden}
+  .lang button{background:none;border:none;color:#B9D4CE;padding:5px 10px;cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+  .lang button[aria-pressed="true"]{background:rgba(255,255,255,.14);color:#fff}
+  .hero h1{font-family:var(--display);font-weight:600;font-size:clamp(44px,8vw,84px);line-height:1;letter-spacing:-.025em;color:#fff;margin-bottom:44px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13.5px;font-weight:500;
+       padding:11px 18px;border-radius:9px;border:1px solid transparent;cursor:pointer;transition:.2s;background:none}
+  .btn svg{width:15px;height:15px;flex:none}
+  .btn-primary{background:var(--teal);color:#fff}
+  .btn-primary:hover{background:#12A092}
+  .btn-ghost{border-color:rgba(255,255,255,.22);color:#DCEBE7}
+  .btn-ghost:hover{border-color:#fff;color:#fff}
+
+  /* SECCIONES + GRID */
+  .section-head{margin:72px 0 24px;padding-bottom:14px;border-bottom:1px solid var(--line-2)}
+  .section-head h2{font-family:var(--display);font-weight:600;font-size:24px;letter-spacing:-.01em}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 26px 20px;
+        display:flex;flex-direction:column;transition:transform .22s ease,box-shadow .22s ease,border-color .22s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(6,37,31,.4);border-color:var(--line-2)}
+  .card-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+  .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+  .status{font-family:var(--mono);font-size:11px;letter-spacing:.04em;white-space:nowrap;
+          padding:3px 9px;border-radius:999px;border:1px solid;display:inline-flex;align-items:center;gap:6px}
+  .status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .st-live{color:#0A6E3F;border-color:#BFE3CF;background:#EEF8F2}
+  .st-launch{color:#0A5D54;border-color:#BFE0DA;background:#ECF6F4}
+  .st-dev{color:#8A4B12;border-color:#EBD3BC;background:#FBF3EA}
+  .st-internal{color:#4B5A56;border-color:#D6DEDB;background:#F3F6F5}
+  .card h3{font-family:var(--display);font-weight:600;font-size:23px;letter-spacing:-.01em;margin-bottom:2px}
+  .org{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:14px}
+  .what{color:#37453F;font-size:15.5px;margin-bottom:18px;flex:1}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+  .chip{font-family:var(--mono);font-size:11.5px;color:var(--teal-deep);background:#EAF4F2;border:1px solid #D8ECE8;border-radius:6px;padding:4px 9px}
+  .card-actions{display:flex;align-items:center;border-top:1px solid var(--line);padding-top:14px}
+  .link-strong{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--teal-deep);display:inline-flex;align-items:center;gap:7px}
+  .link-strong svg{width:14px;height:14px;transition:transform .2s}
+  .card:hover .link-strong svg{transform:translateX(3px)}
+  .icon-btn{margin-left:auto;font-family:var(--mono);font-size:12.5px;color:var(--muted);display:inline-flex;align-items:center;gap:7px;
+            cursor:pointer;background:none;border:none;padding:6px 4px;transition:color .2s}
+  .icon-btn:hover{color:var(--teal-deep)}
+  .icon-btn svg{width:14px;height:14px}
+
+  /* CASO */
+  .case{padding-top:44px;animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .back{font-family:var(--mono);font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:8px;margin-bottom:30px;cursor:pointer;background:none;border:none}
+  .back:hover{color:var(--teal-deep)}
+  .back svg{width:14px;height:14px}
+  .case-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:14px}
+  .case h1{font-family:var(--display);font-weight:600;font-size:clamp(32px,5vw,50px);letter-spacing:-.02em;line-height:1.05;margin-bottom:8px}
+  .case-org{font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:32px}
+  .case-lede{font-size:20px;color:#2C3A35;max-width:740px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--line-2)}
+  .field{display:grid;grid-template-columns:200px 1fr;gap:28px;padding:24px 0;border-bottom:1px solid var(--line)}
+  .field:last-of-type{border-bottom:none}
+  .field .k{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep);padding-top:3px}
+  .field .v{font-size:16.5px;color:#2C3A35;max-width:660px}
+  .field .v .chips{margin:0}
+  .case-foot{margin:44px 0 0;display:flex;gap:12px;flex-wrap:wrap}
+  .btn-solid{background:var(--teal);color:#fff}
+  .btn-solid:hover{background:#12A092}
+  .btn-outline{border:1px solid var(--line-2);color:var(--teal-deep)}
+  .btn-outline:hover{border-color:var(--teal);background:#F1F8F6}
+
+  /* FOOTER */
+  footer{background:var(--teal-ink);color:#CFE3DE;margin-top:88px}
+  footer .wrap{padding:48px 28px}
+  .f-name{font-family:var(--display);font-weight:600;font-size:22px;color:#fff;margin-bottom:18px}
+  .f-links{display:flex;flex-wrap:wrap;gap:22px;font-family:var(--mono);font-size:13.5px}
+  .f-links a{color:#DCEBE7;border-bottom:1px solid transparent;transition:border-color .2s}
+  .f-links a:hover{border-color:#DCEBE7}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--teal-ink);color:#EAF3F1;
+    font-family:var(--mono);font-size:13px;padding:12px 20px;border-radius:10px;box-shadow:0 12px 30px -10px rgba(6,37,31,.6);transition:.3s;z-index:50;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  :focus-visible{outline:2.5px solid var(--teal);outline-offset:3px;border-radius:4px}
+
+  @media (max-width:720px){
+    .grid{grid-template-columns:1fr}
+    .field{grid-template-columns:1fr;gap:8px}
+    .topbar{margin-bottom:56px;gap:16px}
+    .topbar .hide-sm{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     DATOS — única fuente de verdad. Todo el sitio se arma a partir de acá.
+
+     Para AGREGAR un proyecto: copiá un bloque { ... } completo, cambiale el
+     "id" (único, sin espacios) y editá los textos en "es" y "en".
+       group:  "work"  → sección Proyectos (TACTICASOFT)
+               "personal" → sección Proyectos personales
+       status: "prod" | "launch" | "daily" | "delivered" | "dev" | "internal" | "prototype"
+     El orden del array es el orden en pantalla.
+     ===================================================================== -->
+<script>
+const ME = {
+  name: "Facundo Cardinal",
+  linkedin: "https://www.linkedin.com/in/facundocardinal/",
+  github: "https://github.com/facucardi",
+  email: "facundocardinal@gmail.com",
+  // Subí los PDF a una carpeta "cv" del repositorio con estos nombres.
+  // El botón de CV aparece solo cuando el archivo existe.
+  cv: { es: "cv/CV_Facundo_Cardinal_ES.pdf", en: "cv/CV_Facundo_Cardinal_EN.pdf" }
+};
+
+const PROJECTS = [
+  {
+    id: "mcp", group: "work", status: "launch",
+    stack: ["Python", "MCP", "MySQL", "SQL Server", "PyInstaller", "Inno Setup"],
+    es: {
+      name: "MCP de TACTICA", tag: "IA · Integración", org: "TACTICASOFT",
+      what: "Servidor de integración que conecta un asistente de IA con la base de datos de TACTICA para consultar en lenguaje natural todo el circuito comercial del ERP.",
+      problem: "Sacar información del sistema exigía saber SQL y conocer una estructura de datos enorme. Para un usuario de negocio, una pregunta tan simple como «¿qué facturas impagas tiene este cliente?» dependía de un técnico.",
+      role: "Diseño y desarrollo integral: arquitectura, herramientas de consulta, subsistema de permisos, empaquetado e instaladores, y documentación de instalación y uso.",
+      solution: "Un servidor MCP (Model Context Protocol, el estándar abierto para conectar asistentes de IA con datos y herramientas) con 39 herramientas de solo lectura que cubren el circuito comercial completo, de presupuestos a recibos. Un subsistema de permisos por rol define, herramienta por herramienta, qué datos ve cada usuario —por ejemplo, ocultando costos según el perfil—. Una capa de traducción de dialecto SQL sostiene una versión para MySQL y otra para SQL Server sobre el mismo código. Se distribuye con un instalador de Windows por usuario, sin permisos de administrador, y guías de instalación y uso.",
+      result: "En fase de lanzamiento a clientes, con instaladores y guías para MySQL y SQL Server."
+    },
+    en: {
+      name: "TACTICA MCP", tag: "AI · Integration", org: "TACTICASOFT",
+      what: "An integration server that connects an AI assistant to TACTICA's database to query the ERP's entire commercial workflow in natural language.",
+      problem: "Getting information out of the system required SQL and knowledge of a huge data structure. For a business user, a question as simple as “which invoices does this client owe?” depended on a technician.",
+      role: "End-to-end design and development: architecture, query tools, permissions subsystem, packaging and installers, plus setup and user documentation.",
+      solution: "An MCP server (Model Context Protocol, the open standard for connecting AI assistants to data and tools) with 39 read-only tools covering the full commercial workflow, from quotes to receipts. A role-based permissions subsystem defines, tool by tool, what each user can see —for instance, hiding costs depending on the profile. A SQL dialect translation layer supports both a MySQL and a SQL Server edition from the same codebase. It ships as a per-user Windows installer, no admin rights required, with setup and user guides.",
+      result: "Launching to clients, with installers and guides for MySQL and SQL Server."
+    }
+  },
+  {
+    id: "gpt-consultoria", group: "work", status: "daily",
+    stack: ["GPT personalizado (OpenAI)", "Base de conocimiento", "Documentación de procesos"],
+    stackEn: ["Custom GPT (OpenAI)", "Knowledge base", "Process documentation"],
+    es: {
+      name: "GPT de TACTICA", tag: "IA · Conocimiento", org: "TACTICASOFT",
+      what: "Asistente de IA a medida para el equipo de consultoría, con el conocimiento operativo de TACTICA, que ayuda a resolver consultas, fundamentar respuestas a clientes y diseñar circuitos de implementación.",
+      problem: "El conocimiento del sistema —módulos, procesos, circuitos y la forma propia de operar de TACTICA— estaba disperso en documentación suelta y en la experiencia de cada consultor. No había una fuente central para resolver una duda rápido o armar una respuesta sólida para un cliente.",
+      role: "Diseño y desarrollo integral. Mi paso previo por consultoría me permitió saber qué necesitaba de verdad el equipo y cómo hacer la herramienta efectivamente útil.",
+      solution: "Un GPT personalizado alimentado con dos fuentes: un trabajo propio de documentación y recopilación de módulos, herramientas, procesos y complementos de TACTICA, y las transcripciones de las capacitaciones dictadas por consultores, para que la IA aprendiera los circuitos tal como TACTICA los plantea desde adentro. El consultor lo usa como copiloto: consulta lo que desconoce, elabora respuestas fundamentadas y diseña circuitos de producción e implementación.",
+      result: "En uso diario por el equipo de consultores."
+    },
+    en: {
+      name: "TACTICA GPT", tag: "AI · Knowledge", org: "TACTICASOFT",
+      what: "A custom AI assistant for the consulting team, grounded in TACTICA's operational know-how, that helps answer questions, back up client responses and design implementation workflows.",
+      problem: "Knowledge of the system —modules, processes, workflows and TACTICA's own way of operating— was scattered across loose documents and each consultant's experience. There was no central source to quickly resolve a doubt or build a solid answer for a client.",
+      role: "End-to-end design and development. Having previously worked in consulting, I knew what the team actually needed and how to make the tool genuinely useful.",
+      solution: "A custom GPT fed from two sources: my own documentation and compilation of TACTICA's modules, tools, processes and add-ons, and transcripts of training sessions delivered by consultants, so the AI would learn the workflows the way TACTICA designs them from the inside. Consultants use it as a copilot: looking up what they don't know, drafting well-grounded answers and designing production and implementation workflows.",
+      result: "Used daily by the consulting team."
+    }
+  },
+  {
+    id: "portal-tickets", group: "work", status: "prod",
+    stack: ["React", "SQL", "Entorno TACTICA"], stackEn: ["React", "SQL", "TACTICA environment"],
+    es: {
+      name: "Portal de Tickets", tag: "Portal web", org: "TACTICASOFT",
+      what: "Portal web para que los clientes gestionen sus casos de soporte técnico dentro del ecosistema TACTICA, de forma autónoma y en tiempo real.",
+      problem: "El circuito de soporte era indirecto y manual: el cliente reclamaba por las vías que su proveedor tuviera habilitadas, alguien cargaba el ticket a mano en el ERP y las actualizaciones dependían del ida y vuelta de esa comunicación. No había un canal directo ni un seguimiento fluido.",
+      role: "Idea, esquema de uso completo, lógica de funcionamiento y diseño UX. Supervisión del desarrollador backend asignado.",
+      solution: "Un portal de autogestión: el cliente se registra, un supervisor aprueba su acceso y lo vincula a un contacto y empresa del ERP (lo que además evita registros basura) y desde ahí carga sus casos. Cada caso viaja a la base del ERP para que los técnicos lo tomen directamente; las actualizaciones se cargan como notas que vuelven al portal, y al resolverse, el técnico cierra el caso con notas de solución y el cliente puntúa su conformidad del 1 al 10.",
+      result: "En producción, usado por clientes."
+    },
+    en: {
+      name: "Tickets Portal", tag: "Web portal", org: "TACTICASOFT",
+      what: "A web portal for clients to manage their support cases within the TACTICA ecosystem, autonomously and in real time.",
+      problem: "The support workflow was indirect and manual: clients complained through whatever channels their provider offered, someone entered the ticket into the ERP by hand, and updates depended on that back-and-forth. There was no direct channel and no smooth follow-up.",
+      role: "Concept, complete usage flow, functional logic and UX design. Supervised the assigned backend developer.",
+      solution: "A self-service portal: clients sign up, a supervisor approves their access and links them to a contact and company in the ERP (which also keeps junk sign-ups out), and from there they submit cases. Each case flows into the ERP database so technicians can pick it up directly; status updates are logged as notes that flow back to the portal, and once resolved, the technician closes the case with resolution notes and the client rates their satisfaction from 1 to 10.",
+      result: "In production, used by clients."
+    }
+  },
+  {
+    id: "portal-sugerencias", group: "work", status: "prod",
+    stack: ["React", "SQL", "Entorno TACTICA"], stackEn: ["React", "SQL", "TACTICA environment"],
+    es: {
+      name: "Portal de Sugerencias", tag: "Portal web", org: "TACTICASOFT",
+      what: "Portal de sugerencias con votación de la comunidad de clientes, integrado al ecosistema TACTICA.",
+      problem: "No había un canal estructurado para que los clientes propusieran mejoras y las priorizaran entre ellos: las ideas llegaban dispersas y sin forma de medir cuáles tenían más tracción.",
+      role: "Responsable del proyecto, la lógica de uso y el diseño UX, con el mismo esquema de registro y permisos del Portal de Tickets.",
+      solution: "Tomé un patrón de votación de propuestas ya probado por herramientas del rubro (tipo Feature Upvote) y lo integré al ecosistema TACTICA: cada sugerencia ingresa directamente como Requerimiento del cliente en el ERP, con el mismo circuito de registro, aprobación de acceso y vínculo a contacto y empresa. El valor está en conectar esa dinámica con el circuito real de requerimientos del negocio.",
+      result: "En producción, usado por clientes."
+    },
+    en: {
+      name: "Suggestions Portal", tag: "Web portal", org: "TACTICASOFT",
+      what: "A suggestions portal with community voting, integrated into the TACTICA ecosystem.",
+      problem: "There was no structured channel for clients to propose improvements and prioritize them among themselves: ideas arrived scattered, with no way to measure which ones had the most traction.",
+      role: "Project owner, usage logic and UX design, reusing the Tickets Portal's sign-up and permissions model.",
+      solution: "I took a proven idea-voting pattern from tools in the field (Feature Upvote-style) and integrated it into the TACTICA ecosystem: each suggestion enters the ERP directly as a client Requirement, with the same sign-up, access approval and contact/company linking flow. The value lies in connecting that dynamic to the business's real requirements workflow.",
+      result: "In production, used by clients."
+    }
+  },
+  {
+    id: "tactica-produ", group: "work", status: "delivered",
+    stack: ["C#", ".NET 8", "ASP.NET Core", "MySQL", "xUnit"],
+    es: {
+      name: "TACTICA PRODU", tag: "ERP · Producción", org: "TACTICASOFT",
+      what: "Motor de planificación de la producción (MRP) para un módulo de producción de TACTICA: de la demanda a las órdenes de trabajo y de compra.",
+      problem: "Planificar la producción exige calcular, para cada pedido, qué fabricar, qué comprar y cuándo, según la estructura de cada producto y el stock disponible. Hacerlo a mano es lento y propenso a errores.",
+      role: "Relevamiento funcional de un sistema de referencia del rubro, maqueta interactiva y guía del módulo, y desarrollo de la solución.",
+      solution: "Una solución en C# / .NET 8 en cuatro capas: un núcleo de dominio sin dependencias externas con el motor MRP (explosión multinivel de la lista de materiales, neteo contra stock y agenda según plazos de entrega) y la máquina de estados de las órdenes de trabajo; una capa de integración que lee la base del ERP y delega toda escritura en las librerías propias del sistema, para respetar sus reglas de negocio; una API REST con autenticación JWT, documentación Swagger y login contra los usuarios del ERP; y pruebas automatizadas.",
+      result: "Solución entregada; el motor de cálculo está verificado con un caso de prueba completo."
+    },
+    en: {
+      name: "TACTICA PRODU", tag: "ERP · Manufacturing", org: "TACTICASOFT",
+      what: "A production planning (MRP) engine for a TACTICA manufacturing module: from demand to work orders and purchase orders.",
+      problem: "Planning production means working out, for every order, what to make, what to buy and when, based on each product's structure and available stock. Doing it by hand is slow and error-prone.",
+      role: "Functional survey of a reference system in the field, interactive mockup and module guide, and development of the solution.",
+      solution: "A four-layer C# / .NET 8 solution: a dependency-free domain core with the MRP engine (multi-level bill-of-materials explosion, netting against stock and lead-time scheduling) and the work-order state machine; an integration layer that reads the ERP database and delegates every write to the system's own libraries to respect its business rules; a REST API with JWT authentication, Swagger docs and login against ERP users; and automated tests.",
+      result: "Solution delivered; the calculation engine is verified against a complete test case."
+    }
+  },
+  {
+    id: "multi-ia", group: "work", status: "dev",
+    stack: ["Python", "FastAPI", "pywebview", "MCP", "pytest"],
+    es: {
+      name: "Asistente multi-IA", tag: "IA · Escritorio", org: "TACTICASOFT",
+      what: "App de escritorio que lleva las consultas en lenguaje natural del MCP de TACTICA a Claude, ChatGPT o Gemini, a elección del usuario.",
+      problem: "El MCP funcionaba atado a un único asistente de escritorio. Para llegar a más clientes hacía falta poder usar el proveedor de IA que cada uno ya tiene, y sumar visualización de datos.",
+      role: "Arquitectura y desarrollo integral.",
+      solution: "Un motor local en Python (FastAPI) con un ciclo de agente propio y adaptadores por proveedor, que reutiliza tal cual las 39 herramientas del MCP. Interfaz web en ventana de escritorio, credenciales cifradas con el sistema de Windows y permisos heredados del rol del usuario en el ERP. El contrato entre motor e interfaz está cubierto por tests, para poder portar el motor a .NET e integrarlo como módulo nativo de TACTICA.",
+      result: "En desarrollo, en fase de validación."
+    },
+    en: {
+      name: "Multi-AI Assistant", tag: "AI · Desktop", org: "TACTICASOFT",
+      what: "A desktop app that brings the TACTICA MCP's natural-language queries to Claude, ChatGPT or Gemini, at the user's choice.",
+      problem: "The MCP was tied to a single desktop assistant. Reaching more clients required supporting the AI provider each one already uses, plus data visualization.",
+      role: "Architecture and end-to-end development.",
+      solution: "A local Python engine (FastAPI) with its own agent loop and per-provider adapters, reusing the MCP's 39 tools as-is. A web UI in a desktop window, credentials encrypted with Windows' built-in protection, and permissions inherited from the user's ERP role. The engine–UI contract is covered by tests, so the engine can be ported to .NET and integrated as a native TACTICA module.",
+      result: "In development, validation phase."
+    }
+  },
+  {
+    id: "chatbot-wpp", group: "work", status: "internal",
+    stack: ["Java 21", "Spring Boot", "Twilio", "GPT-4o", "MySQL"],
+    es: {
+      name: "Chatbot de WhatsApp", tag: "IA · Chatbot", org: "TACTICASOFT",
+      what: "Asistente conversacional de WhatsApp para consultar información del ERP desde el canal que los usuarios ya usan todos los días.",
+      problem: "Acceder a los datos exigía entrar al ERP de escritorio; no había una vía rápida y móvil para resolver una consulta puntual sobre la marcha.",
+      role: "Diseño y desarrollo integral: idea, lógica y desarrollo.",
+      solution: "Un bot que conecta WhatsApp (vía Twilio) con un modelo de lenguaje que interpreta el pedido, consulta la base del ERP y responde por el mismo chat, con backend en Java / Spring Boot. Su desarrollo fue el germen del MCP, que luego se orientó a clientes por ser una solución más completa, práctica y económica.",
+      result: "En uso interno."
+    },
+    en: {
+      name: "WhatsApp Chatbot", tag: "AI · Chatbot", org: "TACTICASOFT",
+      what: "A conversational WhatsApp assistant to query ERP data from the channel users already use every day.",
+      problem: "Accessing data meant opening the desktop ERP; there was no quick, mobile way to answer a one-off question on the go.",
+      role: "End-to-end design and development: concept, logic and implementation.",
+      solution: "A bot that connects WhatsApp (via Twilio) to a language model that interprets the request, queries the ERP database and replies in the same chat, with a Java / Spring Boot backend. It was the seed of the MCP, which was later aimed at clients as a more complete, practical and cost-effective solution.",
+      result: "Internal use."
+    }
+  },
+  {
+    id: "diccionario", group: "work", status: "internal",
+    stack: ["SQL", "information_schema", "HTML/CSS/JS"],
+    es: {
+      name: "Diccionario de Datos", tag: "Datos · Documentación", org: "TACTICASOFT",
+      what: "Documentación navegable del esquema completo de la base del ERP: 280 tablas y ~3.775 columnas, con sus relaciones.",
+      problem: "La estructura de datos es enorme y la documentación existente tenía errores, lo que volvía lento y riesgoso cualquier desarrollo que dependiera de conocer el esquema.",
+      role: "Análisis del esquema completo y construcción de la herramienta de documentación.",
+      solution: "Mapeé las 280 tablas y sus columnas verificando los nombres reales contra el catálogo del motor de base de datos, en lugar de confiar en la documentación previa, y armé un diccionario navegable para recorrer tablas, columnas y relaciones de un vistazo.",
+      result: "Base de referencia interna para el resto de los desarrollos."
+    },
+    en: {
+      name: "Data Dictionary", tag: "Data · Docs", org: "TACTICASOFT",
+      what: "Navigable documentation of the ERP database's full schema: 280 tables and ~3,775 columns, with their relationships.",
+      problem: "The data structure is huge and the existing documentation had errors, making any development that depended on the schema slow and risky.",
+      role: "Full schema analysis and construction of the documentation tool.",
+      solution: "I mapped all 280 tables and their columns, checking real names against the database engine's catalog instead of trusting the previous documentation, and built a navigable dictionary to browse tables, columns and relationships at a glance.",
+      result: "Internal reference for all subsequent development."
+    }
+  },
+  {
+    id: "afinador", group: "personal", status: "prototype",
+    stack: ["JavaScript", "Web Audio API", "FFT", "MPM"],
+    es: {
+      name: "Afinador de guitarra", tag: "Audio · DSP", org: "Proyecto personal",
+      what: "Afinador que usa el micrófono para medir en tiempo real la afinación de cada cuerda, con afinaciones alternativas gratuitas.",
+      problem: "Las apps más populares cobran por funciones básicas como las afinaciones alternativas. El desafío técnico no es reconocer qué cuerda suena, sino medir el desvío con precisión de un cent (la centésima parte de un semitono).",
+      role: "Investigación, diseño y desarrollo integral.",
+      solution: "Un núcleo de procesamiento de señal sin dependencias: FFT y el método de McLeod (MPM) con interpolación parabólica para medir la frecuencia con precisión. Para corregir el desvío sistemático que introduce la inarmonicidad de las cuerdas, la señal se filtra y se aíslan la fundamental y los primeros armónicos antes de medir. Detección automática de cuerda con histéresis, suavizado por mediana y descarte del ataque de la nota.",
+      result: "Prototipo web funcional, con precisión menor a un cent validada con señales de prueba; versión Android en camino."
+    },
+    en: {
+      name: "Guitar Tuner", tag: "Audio · DSP", org: "Personal project",
+      what: "A tuner that uses the microphone to measure each string's tuning in real time, with free alternate tunings.",
+      problem: "The most popular apps charge for basic features such as alternate tunings. The technical challenge isn't recognizing which string is playing, but measuring the deviation to within one cent (a hundredth of a semitone).",
+      role: "Research, design and end-to-end development.",
+      solution: "A dependency-free signal-processing core: FFT and the McLeod Pitch Method (MPM) with parabolic interpolation for precise frequency measurement. To correct the systematic bias caused by string inharmonicity, the signal is filtered to isolate the fundamental and first harmonics before measuring. Automatic string detection with hysteresis, median smoothing and note-attack rejection.",
+      result: "Working web prototype with sub-cent accuracy validated on test signals; Android version on the way."
+    }
+  }
+];
+</script>
+<!-- ===================================================================== -->
+
+<div id="app"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const UI = {
+  es: { work: "Proyectos", personal: "Proyectos personales", case: "Ver caso", card: "Tarjeta", dlCard: "Descargar tarjeta",
+        back: "Volver a proyectos", all: "Todos los proyectos", cv: "CV (PDF)", generating: "Generando…",
+        cardOk: "Tarjeta descargada", cardErr: "No se pudo generar la tarjeta",
+        f: { problem: "El problema", role: "Mi rol", solution: "La solución", stack: "Stack", result: "Resultado" },
+        st: { prod: "En producción", launch: "En lanzamiento", daily: "En uso diario", delivered: "Entregado", dev: "En desarrollo", internal: "Uso interno", prototype: "Prototipo" } },
+  en: { work: "Projects", personal: "Personal projects", case: "View case", card: "Card", dlCard: "Download card",
+        back: "Back to projects", all: "All projects", cv: "Résumé (PDF)", generating: "Generating…",
+        cardOk: "Card downloaded", cardErr: "Couldn't generate the card",
+        f: { problem: "The problem", role: "My role", solution: "The solution", stack: "Stack", result: "Outcome" },
+        st: { prod: "In production", launch: "Launching", daily: "Used daily", delivered: "Delivered", dev: "In development", internal: "Internal use", prototype: "Prototype" } }
+};
+const ST_CLASS = { prod: "st-live", daily: "st-live", launch: "st-launch", delivered: "st-launch", dev: "st-dev", prototype: "st-dev", internal: "st-internal" };
+
+/* ---------- idioma: ?lang= > elección guardada > español ---------- */
+function initialLang(){
+  const q = new URLSearchParams(location.search).get("lang");
+  if (q === "en" || q === "es") return q;
+  try { const s = localStorage.getItem("lang"); if (s === "en" || s === "es") return s; } catch(e){}
+  return "es";
+}
+let LANG = initialLang();
+function setLang(l){
+  LANG = l;
+  try { localStorage.setItem("lang", l); } catch(e){}
+  const u = new URL(location.href);
+  if (l === "en") u.searchParams.set("lang", "en"); else u.searchParams.delete("lang");
+  history.replaceState(null, "", u.pathname + u.search + u.hash);
+  route();
+}
+
+const app = document.getElementById("app");
+const byId = id => PROJECTS.find(p => p.id === id);
+const L = p => p[LANG];
+const stackOf = p => (LANG === "en" && p.stackEn) ? p.stackEn : p.stack;
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+
+const ICON = {
+  arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>',
+  download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg>',
+  ext: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M10 14L21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>'
+};
+
+const chips = arr => '<div class="chips">' + arr.map(s => '<span class="chip">' + esc(s) + '</span>').join('') + '</div>';
+const statusPill = p => `<span class="status ${ST_CLASS[p.status] || "st-internal"}">${esc(UI[LANG].st[p.status] || p.status)}</span>`;
+
+function topbar(){
+  return `<div class="topbar">
+    <span class="lang" role="group" aria-label="Idioma / Language">
+      <button data-lang="es" aria-pressed="${LANG === "es"}">ES</button><button data-lang="en" aria-pressed="${LANG === "en"}">EN</button>
+    </span>
+    <a class="hide-sm" href="${ME.github}" target="_blank" rel="noopener">GitHub</a>
+    <a class="hide-sm" href="${ME.linkedin}" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:${ME.email}">Email</a>
+  </div>`;
+}
+
+function cardHTML(p){
+  const t = L(p), u = UI[LANG];
+  return `<article class="card">
+    <div class="card-top"><span class="tag">${esc(t.tag)}</span>${statusPill(p)}</div>
+    <h3>${esc(t.name)}</h3>
+    <div class="org">${esc(t.org)}</div>
+    <p class="what">${esc(t.what)}</p>
+    ${chips(stackOf(p))}
+    <div class="card-actions">
+      <a class="link-strong" href="#/p/${p.id}">${u.case} ${ICON.arrow}</a>
+      <button class="icon-btn" data-card="${p.id}" aria-label="${esc(u.dlCard + ": " + t.name)}">${ICON.download} ${u.card}</button>
+    </div>
+  </article>`;
+}
+
+function renderHome(){
+  const u = UI[LANG];
+  const section = (group, title) => {
+    const list = PROJECTS.filter(p => p.group === group);
+    if (!list.length) return "";
+    return `<div class="section-head"><h2>${title}</h2></div><div class="grid">${list.map(cardHTML).join("")}</div>`;
+  };
+  app.innerHTML = `
+  <header class="hero"><div class="wrap">
+    ${topbar()}
+    <h1>Facundo<br>Cardinal</h1>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="${ME.linkedin}" target="_blank" rel="noopener">${ICON.ext} LinkedIn</a>
+      <a class="btn btn-ghost" href="${ME.github}" target="_blank" rel="noopener">${ICON.ext} GitHub</a>
+      <a class="btn btn-ghost" id="cvBtn" href="${ME.cv[LANG]}" target="_blank" rel="noopener" hidden>${ICON.download} ${u.cv}</a>
+    </div>
+  </div></header>
+  <main class="wrap">
+    ${section("work", u.work)}
+    ${section("personal", u.personal)}
+  </main>
+  ${footerHTML()}`;
+  afterRender("Facundo Cardinal · Portfolio");
+  revealCV();
+}
+
+function renderCase(id){
+  const p = byId(id);
+  if (!p) { location.hash = "#/"; return; }
+  const t = L(p), u = UI[LANG];
+  app.innerHTML = `
+  <header class="hero"><div class="wrap" style="padding-bottom:28px">${topbar()}</div></header>
+  <main class="wrap case">
+    <button class="back" data-home>${ICON.back} ${u.back}</button>
+    <div class="case-meta"><span class="tag">${esc(t.tag)}</span>${statusPill(p)}</div>
+    <h1>${esc(t.name)}</h1>
+    <div class="case-org">${esc(t.org)}</div>
+    <p class="case-lede">${esc(t.what)}</p>
+    <div class="field"><div class="k">${u.f.problem}</div><div class="v">${esc(t.problem)}</div></div>
+    <div class="field"><div class="k">${u.f.role}</div><div class="v">${esc(t.role)}</div></div>
+    <div class="field"><div class="k">${u.f.solution}</div><div class="v">${esc(t.solution)}</div></div>
+    <div class="field"><div class="k">${u.f.stack}</div><div class="v">${chips(stackOf(p))}</div></div>
+    <div class="field"><div class="k">${u.f.result}</div><div class="v">${esc(t.result)}</div></div>
+    <div class="case-foot">
+      <button class="btn btn-solid" data-card="${p.id}">${ICON.download} ${u.dlCard}</button>
+      <button class="btn btn-outline" data-home>${ICON.back} ${u.all}</button>
+    </div>
+  </main>
+  ${footerHTML()}`;
+  afterRender(t.name + " · Facundo Cardinal");
+}
+
+function footerHTML(){
+  return `<footer><div class="wrap">
+    <div class="f-name">${ME.name}</div>
+    <div class="f-links">
+      <a href="${ME.linkedin}" target="_blank" rel="noopener">linkedin.com/in/facundocardinal</a>
+      <a href="${ME.github}" target="_blank" rel="noopener">github.com/facucardi</a>
+      <a href="mailto:${ME.email}">${ME.email}</a>
+    </div>
+  </div></footer>`;
+}
+
+function afterRender(title){
+  document.title = title;
+  document.documentElement.lang = LANG;
+  document.querySelectorAll("[data-card]").forEach(b => b.addEventListener("click", () => downloadCard(b.dataset.card, b)));
+  document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => { if (b.dataset.lang !== LANG) setLang(b.dataset.lang); }));
+  document.querySelectorAll("[data-home]").forEach(b => b.addEventListener("click", () => { location.hash = "#/"; }));
+  window.scrollTo(0, 0);
+}
+
+/* El botón de CV solo aparece si el PDF existe en el sitio publicado */
+async function revealCV(){
+  const btn = document.getElementById("cvBtn");
+  if (!btn || location.protocol === "file:") return;
+  try {
+    const r = await fetch(ME.cv[LANG], { method: "HEAD", cache: "no-store" });
+    if (r.ok) btn.hidden = false;
+  } catch(e){}
+}
+
+/* ---------- router ---------- */
+function route(){
+  const m = location.hash.replace(/^#/, "").match(/^\/p\/([\w-]+)$/);
+  if (m) renderCase(m[1]); else renderHome();
+}
+window.addEventListener("hashchange", route);
+
+/* ---------- toast ---------- */
+let toastT;
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+/* ---------- tarjeta PNG (1080×1350, formato vertical para redes y chats) ---------- */
+function buildCardNode(p){
+  const t = L(p), u = UI[LANG];
+  const nameSize = t.name.length > 20 ? 76 : 92;
+  const node = document.createElement("div");
+  node.style.cssText = "position:fixed;left:-10000px;top:0;width:1080px;height:1350px;box-sizing:border-box;overflow:hidden;" +
+    "background:linear-gradient(160deg,#06251F 0%,#0A342C 60%,#0C4038 100%);color:#EAF3F1;padding:96px 88px;" +
+    "display:flex;flex-direction:column;font-family:Inter,system-ui,sans-serif;";
+  const chipHtml = stackOf(p).map(s => `<span style="font-family:'JetBrains Mono',monospace;font-size:24px;color:#8FE0D3;border:1px solid rgba(143,224,211,.4);border-radius:10px;padding:9px 18px;display:inline-block;margin:0 12px 12px 0;">${esc(s)}</span>`).join("");
+  node.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:#12A092;">${esc(t.tag)}</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:22px;color:#EAF3F1;border:1px solid rgba(234,243,241,.35);border-radius:999px;padding:8px 20px;">${esc(u.st[p.status] || "")}</div>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:22px;color:#6FA79E;margin-bottom:52px;">${esc(t.org)}</div>
+    <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:${nameSize}px;line-height:1.02;letter-spacing:-.02em;color:#fff;margin-bottom:38px;">${esc(t.name)}</div>
+    <div style="font-size:36px;line-height:1.42;color:#CFE3DE;margin-bottom:48px;">${esc(t.what)}</div>
+    <div>${chipHtml}</div>
+    <div style="margin-top:44px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:24px;color:#8FE0D3;margin-bottom:8px;">${esc(u.f.role)}</div>
+      <div style="font-size:29px;line-height:1.42;color:#DCEBE7;">${esc(t.role)}</div>
+    </div>
+    <div style="margin-top:auto;">
+      <div style="height:1px;background:rgba(143,224,211,.25);margin-bottom:34px;"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:24px;color:#8FE0D3;margin-bottom:6px;">${esc(u.f.result)}</div>
+          <div style="font-size:28px;line-height:1.35;color:#EAF3F1;max-width:600px;">${esc(t.result)}</div>
+        </div>
+        <div style="text-align:right;flex:none;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:34px;color:#fff;">${esc(ME.name)}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:22px;color:#6FA79E;">facucardi.github.io</div>
+        </div>
+      </div>
+    </div>`;
+  return node;
+}
+
+async function downloadCard(id, btn){
+  const p = byId(id); if (!p) return;
+  const u = UI[LANG], original = btn.innerHTML;
+  if (typeof html2canvas !== "function") { toast(u.cardErr); return; }
+  btn.disabled = true; btn.innerHTML = ICON.download + " " + u.generating;
+  const node = buildCardNode(p);
+  document.body.appendChild(node);
+  try {
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    await new Promise(r => setTimeout(r, 120));
+    const canvas = await html2canvas(node, { scale: 1, backgroundColor: "#06251F", logging: false, width: 1080, height: 1350 });
+    const a = document.createElement("a");
+    a.download = `Facundo-Cardinal_${p.id}_${LANG}.png`;
+    a.href = canvas.toDataURL("image/png");
+    document.body.appendChild(a); a.click(); a.remove();
+    toast(u.cardOk);
+  } catch(e) {
+    console.error(e); toast(u.cardErr);
+  } finally {
+    node.remove(); btn.disabled = false; btn.innerHTML = original;
+  }
+}
+
+route();
+</script>
+</body>
+</html>
