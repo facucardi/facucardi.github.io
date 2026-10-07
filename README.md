@@ -9,4 +9,4 @@ Single-file static site (HTML/CSS/JS), bilingual (ES/EN), data-driven: every pag
 ## Update
 
 - **Add a project:** copy one `{ ... }` block in `PROJECTS`, give it a new `id`, edit the `es` / `en` texts and push.
-- **Résumé button:** upload `cv/CV_Facundo_Cardinal_ES.pdf` and `cv/CV_Facundo_Cardinal_EN.pdf`; the button shows up automatically.
+- **Résumé button:** keep `CV_Facundo_Cardinal_ES.pdf` and `CV_Facundo_Cardinal_EN.pdf` in the repository root; the button shows up automatically.
